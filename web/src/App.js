@@ -1,31 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import './global.css';
 import './Sidebar.css'
 import './Main.css';
 import './App.css';
 
 function App() {
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [github_username, setGithubUsername] = useState('');
+  const [techs, setTechs] = useState('');
+  
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const { latitude, longitude } = position.coords;
+        setLatitude(latitude);
+        setLongitude(longitude);
+      },
+      console.warn,
+      {timeout: 30000}
+    );
+  }, []);
+
+  async function handleAddDev(event) {
+    event.preventDefault();
+  }
+
   return (
     <div id="app">
       <aside>
         <strong>Cadastrar</strong>
         <form>
-          <div class="input-block">
+          <div className="input-block">
             <label htmlFor="github_username">Github username</label>
-            <input name="github_username" id="github_username" required />
+            <input
+              name="github_username"
+              id="github_username"
+              required
+              value={github_username}
+              onChange={e => e.target.value}
+            />
           </div>
-          <div class="input-block">
+          <div className="input-block">
             <label htmlFor="techs">Technologies</label>
-            <input name="techs" id="techs" required />
+            <input
+              name="techs"
+              id="techs"
+              required
+              value={techs}
+              onChange={e => e.target.value}
+            />
           </div>
-          <div class="input-group">
-            <div class="input-block">
+          <div className="input-group">
+            <div className="input-block">
               <label htmlFor="latitude">Latitude</label>
-              <input name="latitude" id="latitude" required />
+              <input
+                name="latitude"
+                id="latitude"
+                required
+                value={latitude}
+                onChange={e => setLatitude(e.target.value)}
+              />
             </div>
-            <div class="input-block">
+            <div className="input-block">
               <label htmlFor="longitude">Longitude</label>
-              <input name="longitude" id="longitude" required />
+              <input
+                name="longitude"
+                id="longitude"
+                required
+                value={longitude}
+                onChange={e => setLongitude(e.target.value)}
+              />
             </div>
           </div>
           <button type="submit">Save</button>
@@ -33,30 +79,30 @@ function App() {
       </aside>
       <main>
         <ul>
-          <li class="dev-item">
+          <li className="dev-item">
             <header>
               <img src="https://avatars1.githubusercontent.com/u/36269699?s=460&v=4" alt=""/>
-              <div class="user-info">
+              <div className="user-info">
                 <strong>Maicon</strong>
                 <span>Angular</span>
                 <a href="https://github.com/maiconm">Perfil do github</a>
               </div>
             </header>
           </li>
-          <li class="dev-item">
+          <li className="dev-item">
             <header>
               <img src="https://avatars1.githubusercontent.com/u/36269699?s=460&v=4" alt=""/>
-              <div class="user-info">
+              <div className="user-info">
                 <strong>Maicon</strong>
                 <span>Angular</span>
                 <a href="https://github.com/maiconm">Perfil do github</a>
               </div>
             </header>
           </li>
-          <li class="dev-item">
+          <li className="dev-item">
             <header>
               <img src="https://avatars1.githubusercontent.com/u/36269699?s=460&v=4" alt=""/>
-              <div class="user-info">
+              <div className="user-info">
                 <strong>Maicon</strong>
                 <span>Angular</span>
                 <a href="https://github.com/maiconm">Perfil do github</a>
