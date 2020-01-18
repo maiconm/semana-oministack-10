@@ -23,3 +23,15 @@ Content-Type: application/json
     "username": "Maicon",
     "description": "developer"
 }
+
+### Register Dev
+POST /devs HTTP/1.1
+Host: localhost:7777
+Content-Type: application/json
+
+{
+    "github_username": "maiconm",
+    "techs": "Angular, ReactJS, Ionic, ReactNative, Node.js",
+    "lat": 32.4586858,
+    "lon": -110.8571443
+}
