@@ -1,0 +1,25 @@
+### Hello World
+GET / HTTP/1.1
+Host: localhost:7777
+
+### Tutorial - Query params
+GET /tutorial/users?search=Maicon HTTP/1.1
+Host: localhost:7777
+
+### Tutorial - Route params - PUT
+PUT /tutorial/users/1 HTTP/1.1
+Host: localhost:7777
+
+### Tutorial - Route params - DELETE
+DELETE /tutorial/users/1 HTTP/1.1
+Host: localhost:7777
+
+### Tutorial - Body
+POST /tutorial/users/maicon HTTP/1.1
+Host: localhost:7777
+Content-Type: application/json
+
+{
+    "username": "Maicon",
+    "description": "developer"
+}
