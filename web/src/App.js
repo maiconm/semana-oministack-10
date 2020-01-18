@@ -7,6 +7,7 @@ import './Main.css';
 import './App.css';
 
 function App() {
+  const [devs, setDevs] = useState([]);
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [github_username, setGithubUsername] = useState('');
@@ -24,9 +25,18 @@ function App() {
     );
   }, []);
 
+  useEffect(() => {
+    async function loadDevs() {
+      const response = await api.get('/devs');
+      setDevs(response.data);
+    }
+
+    loadDevs();
+  }, []);
+
   async function handleAddDev(event) {
     event.preventDefault();
-    console.log({github_username, techs})
+
     const response = await api.post('/devs', {
       github_username,
       techs,
@@ -36,6 +46,8 @@ function App() {
 
     setGithubUsername('');
     setTechs('');
+
+    setDevs([...devs, response.data]);
   }
 
   return (
@@ -90,36 +102,19 @@ function App() {
       </aside>
       <main>
         <ul>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/36269699?s=460&v=4" alt=""/>
-              <div className="user-info">
-                <strong>Maicon</strong>
-                <span>Angular</span>
-                <a href="https://github.com/maiconm">Perfil do github</a>
-              </div>
-            </header>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/36269699?s=460&v=4" alt=""/>
-              <div className="user-info">
-                <strong>Maicon</strong>
-                <span>Angular</span>
-                <a href="https://github.com/maiconm">Perfil do github</a>
-              </div>
-            </header>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/36269699?s=460&v=4" alt=""/>
-              <div className="user-info">
-                <strong>Maicon</strong>
-                <span>Angular</span>
-                <a href="https://github.com/maiconm">Perfil do github</a>
-              </div>
-            </header>
-          </li>
+          {devs.map(dev =>
+            <li key={dev._id} className="dev-item">
+              <header>
+                <img src={dev.avatar_url} alt={dev.name}/>
+                <div className="user-info">
+                  <strong>{dev.name}</strong>
+                  <span>{dev.techs.join(', ')}</span>
+                </div>
+              </header>
+              <p>{dev.bio}</p>
+              <a href={`https://github.com/${dev.github_username}`}>Perfil do github</a>
+            </li>
+          )}
         </ul>
       </main>
     </div>
