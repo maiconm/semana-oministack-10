@@ -1,8 +1,13 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
-app.use(express.json());
 
+app.use(express.json());
+mongoose.connect('mongodb+srv://maicon:omnistack@cluster0-rgv9v.mongodb.net/week10?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 app.get('/', (_, response) => {
     response.json({ hello: 'world!' });
 });
