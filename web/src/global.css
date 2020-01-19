@@ -7,9 +7,7 @@
 	box-sizing: border-box;
 }
 
-html, body, #root {
-	height: 100%;
-}
+html, body, #root { height: 100% }
 
 body {
 	background: #E5E6F0;
