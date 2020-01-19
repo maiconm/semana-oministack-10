@@ -5,5 +5,6 @@ exports.setUpWebsocket = (server) => {
 
   io.on('connection', socket => {
     console.log(socket.id);
+    console.log(socket.handshake.query);
   });
 };
