@@ -30,7 +30,7 @@ function App() {
   return (
     <div id="app">
       <aside>
-        <strong>Cadastrar</strong>
+        <strong>Sign up</strong>
         <DevForm onSubmit={handleAddDev}/>
       </aside>
       <main>
