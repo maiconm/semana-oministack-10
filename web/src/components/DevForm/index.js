@@ -25,8 +25,8 @@ function DevForm({ onSubmit }) {
     await onSubmit({
       github_username,
       techs,
-      lat: latitude,
-      lon: longitude
+      latitude,
+      longitude
     });
 
     setGithubUsername('');
