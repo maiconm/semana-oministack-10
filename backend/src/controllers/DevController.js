@@ -4,40 +4,40 @@ const Dev = require('../models/Dev');
 const parseStringAsArray = require('../utils/parseStringAsArray');
 
 module.exports = {
-    async index(_, response) {
-        const devs = await Dev.find();
+  async index(_, response) {
+    const devs = await Dev.find();
 
-        response.json(devs);
-    },
+    response.json(devs);
+  },
 
-    async store(request, response) {
-        const { github_username, techs, lat, lon } = request.body;
+  async store(request, response) {
+    const { github_username, techs, lat, lon } = request.body;
 
-        let dev = await Dev.findOne({ github_username });
+    let dev = await Dev.findOne({ github_username });
 
-        if (!dev) {
+    if (!dev) {
 
-            const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
+      const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
 
-            const { name, login, avatar_url, bio } = apiResponse.data;
+      const { name, login, avatar_url, bio } = apiResponse.data;
 
-            const techsArray = parseStringAsArray(techs);
+      const techsArray = parseStringAsArray(techs);
 
-            const location = {
-                type: 'Point',
-                coordinates: [lon, lat]
-            };
+      const location = {
+        type: 'Point',
+        coordinates: [lon, lat]
+      };
 
-            dev = await Dev.create({
-                name: name || login,
-                github_username,
-                avatar_url,
-                bio: bio || 'Not defined',
-                techs: techsArray,
-                location
-            });
-        }
-
-        return response.json(dev);
+      dev = await Dev.create({
+        name: name || login,
+        github_username,
+        avatar_url,
+        bio: bio || 'Not defined',
+        techs: techsArray,
+        location,
+      });
     }
+
+    return response.json(dev);
+  }
 }

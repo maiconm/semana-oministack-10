@@ -20,8 +20,8 @@ Host: localhost:7777
 Content-Type: application/json
 
 {
-    "username": "Maicon",
-    "description": "developer"
+  "username": "Maicon",
+  "description": "developer"
 }
 
 ### Register Dev
@@ -30,10 +30,10 @@ Host: localhost:7777
 Content-Type: application/json
 
 {
-    "github_username": "maiconm",
-    "techs": "Angular, ReactJS, Ionic, ReactNative, Node.js",
-    "lat": 32.4586858,
-    "lon": -110.8571443
+  "github_username": "maiconm",
+  "techs": "Angular, ReactJS, Ionic, ReactNative, Node.js",
+  "lat": 32.4586858,
+  "lon": -110.8571443
 }
 
 ### List all developers
